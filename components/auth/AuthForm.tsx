@@ -23,8 +23,8 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
-import FileUpload from "@/components/FileUpload";
-import { toast } from "@/hooks/use-toast";
+import FileUpload from "@/components/custom/FileUpload";
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 interface Props<T extends FieldValues> {
@@ -53,20 +53,11 @@ const AuthForm = <T extends FieldValues>({
     const result = await onSubmit(data);
 
     if (result.success) {
-      toast({
-        title: "Success",
-        description: isSignIn
-          ? "You have successfully signed in."
-          : "You have successfully signed up.",
-      });
+      toast("Success You have successfully signed up ");
 
       router.push("/");
     } else {
-      toast({
-        title: `Error ${isSignIn ? "signing in" : "signing up"}`,
-        description: result.error ?? "An error occurred.",
-        variant: "destructive",
-      });
+      toast(`Error ${isSignIn ? "signing in" : "signing up"}`);
     }
   };
 
